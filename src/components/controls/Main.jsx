@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import Home from '../ui/Home'
 import Movie from '../ui/Movie'
 import MovieDetail from '../ui/MovieDetail'
+import Tv from '../ui/Tv'
 
 function Main() {
   return (
@@ -12,8 +13,10 @@ function Main() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/moviedetail/:id' element={<MovieDetail />} />
+          <Route path='/moviedetail/:id' element={<MovieDetail/>} />
           <Route path='/movie' element={<Movie />} />
+          <Route path='/tv' element={<Tv/>}/>
+          <Route path='/tvdetail/:id' element={<MovieDetail/>}/>
         </Routes>
       </BrowserRouter>
     </div>

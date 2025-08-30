@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 function Home() {
   return (
@@ -20,21 +20,7 @@ function Home() {
           </button>
          </Link>
         </div>
-         <section className="px-6 py-16">
-        <h2 className="text-2xl font-bold text-white mb-6">Popular Movies</h2>
-        <div className="grid grid-cols-2 -z-50 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition">
-            <div className="p-3 hover:scale-105">
-              <h3 className="text-lg font-semibold text-white ">Movie Title</h3>
-            </div>
-          </div>
-          <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg  transition">
-            <div className="p-3">
-              <h3 className="text-lg font-semibold text-white ">Another Movie</h3>
-            </div>
-          </div>
-        </div>
-      </section>
+         
       </div>
 
      

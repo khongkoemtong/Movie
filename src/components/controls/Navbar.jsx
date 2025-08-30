@@ -20,9 +20,11 @@ function Navbar() {
               Movie
             </a>
           </Link>
-          <a href="#" class="hover:text-red-500 transition">
-            TV Shows
-          </a>
+         <Link to='/tv'>
+            <a href="#" class="hover:text-red-500 transition">
+            Tv
+            </a>
+          </Link>
           <a href="#" class="hover:text-red-500 transition">
             Trending
           </a>
