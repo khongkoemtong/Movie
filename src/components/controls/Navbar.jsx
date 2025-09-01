@@ -9,7 +9,8 @@ function Navbar() {
           <span class="text-2xl font-bold tracking-wide">MovieApp</span>
         </div>
 
-        <div class="hidden md:flex space-x-8 text-lg font-medium">
+        <div class="hidden  md:hidden   space-x-8 text-lg font-medium">
+          
           <Link to='/'>
             <a href="#" class="hover:text-red-500 transition">
               Home
@@ -25,9 +26,44 @@ function Navbar() {
             Tv
             </a>
           </Link>
-          <a href="#" class="hover:text-red-500 transition">
+        
+        <Link to="/trending">
+        <a href="#" class="hover:text-red-500 transition">
             Trending
           </a>
+        </Link>
+        <a href="#" class="hover:text-red-500 transition">
+            Trending
+          </a>
+        </div>
+
+        <div>
+          <div class="hidden md:flex space-x-8 text-lg font-medium">
+          <Link to='/'>
+            <a href="#" class="hover:text-red-500 transition">
+              Home
+            </a>
+          </Link>
+          <Link to='/movie'>
+            <a href="#" class="hover:text-red-500 transition">
+              Movie
+            </a>
+          </Link>
+         <Link to='/tv'>
+            <a href="#" class="hover:text-red-500 transition">
+            Tv
+            </a>
+          </Link>
+        
+        <Link to="/trending">
+        <a href="#" class="hover:text-red-500 transition">
+            Trending
+          </a>
+        </Link>
+        <a href="#" class="hover:text-red-500 transition">
+            Trending
+          </a>
+        </div>
         </div>
 
         <div class="flex items-center space-x-4">

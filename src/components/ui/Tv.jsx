@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function Tv() {
   const [data, setData] = useState([]);
@@ -45,11 +46,11 @@ function Tv() {
 
   // Handle manual banner navigation
   const nextBanner = () => {
-    setCurrentBannerIndex((prev) => (prev + 1) % Math.min(data.length, 5));
+    setCurrentBannerIndex((prev) => (prev + 1) % Math.min(data.length, 10));
   };
 
   const prevBanner = () => {
-    setCurrentBannerIndex((prev) => (prev - 1 + Math.min(data.length, 5)) % Math.min(data.length, 5));
+    setCurrentBannerIndex((prev) => (prev - 1 + Math.min(data.length, 10)) % Math.min(data.length, 10));
   };
 
   return (
@@ -93,6 +94,7 @@ function Tv() {
           100% { transform: translateX(-50px); }
         }
       `}</style>
+      
       {/* Banner with Animation */}
       <section className="relative h-[80vh] overflow-hidden rounded-b-2xl shadow-xl">
         {/* Background Images with Smooth Transition */}
@@ -116,12 +118,18 @@ function Tv() {
               {featuredShow?.overview}
             </p>
             <div className="flex gap-4 mt-6">
-              <button className="px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200">
+              <Link 
+                to={`/tvdetail/${featuredShow?.id}`}
+                className="px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+              >
                 ▶ Watch Now
-              </button>
-              <button className="px-6 py-2 bg-gray-800/70 hover:bg-gray-700/70 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200">
+              </Link>
+              <Link 
+                to={`/tvdetail/${featuredShow?.id}`}
+                className="px-6 py-2 bg-gray-800/70 hover:bg-gray-700/70 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+              >
                 ℹ More Info
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -161,9 +169,10 @@ function Tv() {
         <h3 className="text-2xl font-semibold mb-6">Popular TV Shows</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {data.map((show) => (
-            <div
+            <Link 
               key={show.id}
-              className="bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transform transition duration-300 cursor-pointer"
+              to={`/tvdetail/${show.id}`}
+              className="bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transform transition duration-300 cursor-pointer block"
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
@@ -174,7 +183,7 @@ function Tv() {
                 <h4 className="text-lg font-bold">{show.name}</h4>
                 <p className="text-gray-400 text-sm">⭐ {show.vote_average?.toFixed(1)}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </main>

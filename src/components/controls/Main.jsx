@@ -5,6 +5,7 @@ import Home from '../ui/Home'
 import Movie from '../ui/Movie'
 import MovieDetail from '../ui/MovieDetail'
 import Tv from '../ui/Tv'
+import Trending from '../ui/Trending'
 
 function Main() {
   return (
@@ -17,6 +18,8 @@ function Main() {
           <Route path='/movie' element={<Movie />} />
           <Route path='/tv' element={<Tv/>}/>
           <Route path='/tvdetail/:id' element={<MovieDetail/>}/>
+          <Route path='/trending' element ={<Trending/>}/>
+          
         </Routes>
       </BrowserRouter>
     </div>

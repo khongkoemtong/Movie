@@ -17,11 +17,11 @@ function Movie() {
   }, []);
 
   return (
-    <div className="grid grid-cols-4 gap-4 p-[30px]">
+    <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 xl:grid xl:grid-cols-4  gap-4 p-[30px]">
       {data.map((item) => (
         <div
           key={item.id}
-          className="max-w-xs bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:scale-95 transform transition duration-300 cursor-pointer"
+          className=" bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:scale-95 transform transition duration-300 cursor-pointer"
         >
           <div
             className="h-80 bg-cover bg-center"

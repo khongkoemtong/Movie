@@ -1,22 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { data } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function TvDetail() {
-  // Mock data - in real app, this would come from API or props
+  const { id } = useParams(); // Extract id from route params
   const [showData, setShowData] = useState(null);
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
 
   useEffect(() => {
     // Simulate API call
-    const setShowData =async()=>{
-      const take = await fetch(`https://api.themoviedb.org/3/tv/popular/${id}?api_key=aacdbe83dedab8fc913bd72adf3fdbad`);
-      const result = await take.json();
-
-     setShowData(result);
+    const fetchShowData = async () => {
+      try {
+        // Correct TMDB API endpoint for TV show details
+        const response = await fetch(`https://api.themoviedb.org/3/tv/popular${id}?api_key=aacdbe83dedab8fc913bd72adf3fdbad`);
+        const result = await response.json();
+        
+        // Set mock data since TMDB structure might be different
+        setShowData({
+          ...result,
+          episodes: [
+            { id: 1, episode_number: 1, season_number: 1, name: "Pilot", runtime: 45, air_date: "2021-01-01", vote_average: 8.5 },
+            { id: 2, episode_number: 2, season_number: 1, name: "The Beginning", runtime: 43, air_date: "2021-01-08", vote_average: 8.2 },
+            // Add more mock episodes as needed
+          ],
+          seasons: [
+            { season_number: 1, name: "Season 1" },
+            { season_number: 2, name: "Season 2" },
+          ],
+          cast: result.credits?.cast?.slice(0, 6).map(actor => ({
+            name: actor.name,
+            character: actor.character
+          })) || [],
+          created_by: result.created_by?.map(creator => creator.name) || ['Unknown'],
+          networks: result.networks?.map(network => network.name) || ['Unknown'],
+          runtime: result.episode_run_time || [45],
+          similar: result.similar?.results?.slice(0, 8) || []
+        });
+      } catch (error) {
+        console.error('Error fetching show data:', error);
+      }
+    };
+    
+    if (id) {
+      fetchShowData();
     }
-    
-    
   }, [id]);
 
   if (!showData) {
@@ -30,19 +57,14 @@ function TvDetail() {
   const currentSeasonEpisodes = showData.episodes.filter(ep => ep.season_number === selectedSeason);
 
   return (
-   <div>
-
-    {
-
-      data.map(()=>{
-         <div className="bg-gray-950 min-h-screen text-white">
+    <div className="bg-gray-950 min-h-screen text-white">
       {/* Hero Section */}
       <div className="relative h-[80vh] overflow-hidden">
         {/* Background */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/w1280${showData.backdrop_path})`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/w1280${showData.poster_path})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
@@ -77,9 +99,9 @@ function TvDetail() {
               </div>
               
               <div className="flex flex-wrap gap-2">
-                {showData.genres.map((genre, index) => (
+                {showData.genres?.map((genre, index) => (
                   <span key={index} className="bg-gray-800 px-3 py-1 rounded-full text-sm">
-                    {genre}
+                    {genre.name || genre}
                   </span>
                 ))}
               </div>
@@ -119,7 +141,7 @@ function TvDetail() {
               onChange={(e) => setSelectedSeason(Number(e.target.value))}
               className="bg-gray-800 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-red-600 outline-none"
             >
-              {showData.seasons.map((season) => (
+              {showData.seasons?.map((season) => (
                 <option key={season.season_number} value={season.season_number}>
                   Season {season.season_number}
                 </option>
@@ -157,7 +179,7 @@ function TvDetail() {
         <section>
           <h2 className="text-3xl font-bold mb-8">Cast</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {showData.cast.map((actor, index) => (
+            {showData.cast?.map((actor, index) => (
               <div key={index} className="text-center group cursor-pointer">
                 <div className="w-full h-48 bg-gray-800 rounded-xl mb-3 overflow-hidden">
                   <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-4xl">
@@ -180,11 +202,11 @@ function TvDetail() {
             <div className="space-y-4">
               <div>
                 <span className="text-gray-400 font-medium">Created by: </span>
-                <span>{showData.created_by.join(', ')}</span>
+                <span>{showData.created_by?.join(', ')}</span>
               </div>
               <div>
                 <span className="text-gray-400 font-medium">Network: </span>
-                <span>{showData.networks.join(', ')}</span>
+                <span>{showData.networks?.join(', ')}</span>
               </div>
               <div>
                 <span className="text-gray-400 font-medium">Status: </span>
@@ -198,7 +220,7 @@ function TvDetail() {
               </div>
               <div>
                 <span className="text-gray-400 font-medium">Runtime: </span>
-                <span>{showData.runtime[0]} minutes</span>
+                <span>{showData.runtime?.[0]} minutes</span>
               </div>
               <div>
                 <span className="text-gray-400 font-medium">Total Episodes: </span>
@@ -212,7 +234,7 @@ function TvDetail() {
         <section>
           <h2 className="text-3xl font-bold mb-8">More Like This</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {showData.similar.map((similar) => (
+            {showData.similar?.map((similar) => (
               <div key={similar.id} className="group cursor-pointer">
                 <div className="bg-gray-800 rounded-xl overflow-hidden mb-3 transform group-hover:scale-105 transition-transform duration-300">
                   <div className="w-full h-64 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
@@ -248,9 +270,6 @@ function TvDetail() {
         </div>
       )}
     </div>
-      })
-    }
-   </div>
   );
 }
 
