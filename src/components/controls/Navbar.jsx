@@ -1,80 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react"; // icons
 
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div>
-      <nav class="bg-black text-white px-6 py-4 flex items-center justify-between shadow-lg">
-        <div class="flex items-center space-x-3">
-          <span class="text-2xl font-bold tracking-wide">MovieApp</span>
+    <nav className="bg-black text-white px-6 py-4 shadow-lg">
+      <div className="flex items-center justify-between">
+        {/* Logo */}
+        <div className="text-2xl font-bold tracking-wide">MovieApp</div>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex space-x-8 text-lg font-medium">
+          <Link to="/" className="hover:text-red-500 transition">
+            Home
+          </Link>
+          <Link to="/movie" className="hover:text-red-500 transition">
+            Movie
+          </Link>
+          <Link to="/tv" className="hover:text-red-500 transition">
+            TV
+          </Link>
+          <Link to="/trending" className="hover:text-red-500 transition">
+            Trending
+          </Link>
         </div>
 
-        <div class="hidden  md:hidden   space-x-8 text-lg font-medium">
-          
-          <Link to='/'>
-            <a href="#" class="hover:text-red-500 transition">
-              Home
-            </a>
-          </Link>
-          <Link to='/movie'>
-            <a href="#" class="hover:text-red-500 transition">
-              Movie
-            </a>
-          </Link>
-         <Link to='/tv'>
-            <a href="#" class="hover:text-red-500 transition">
-            Tv
-            </a>
-          </Link>
-        
-        <Link to="/trending">
-        <a href="#" class="hover:text-red-500 transition">
-            Trending
-          </a>
-        </Link>
-        <a href="#" class="hover:text-red-500 transition">
-            Trending
-          </a>
-        </div>
-
-        <div>
-          <div class="hidden md:flex space-x-8 text-lg font-medium">
-          <Link to='/'>
-            <a href="#" class="hover:text-red-500 transition">
-              Home
-            </a>
-          </Link>
-          <Link to='/movie'>
-            <a href="#" class="hover:text-red-500 transition">
-              Movie
-            </a>
-          </Link>
-         <Link to='/tv'>
-            <a href="#" class="hover:text-red-500 transition">
-            Tv
-            </a>
-          </Link>
-        
-        <Link to="/trending">
-        <a href="#" class="hover:text-red-500 transition">
-            Trending
-          </a>
-        </Link>
-        <a href="#" class="hover:text-red-500 transition">
-            Trending
-          </a>
-        </div>
-        </div>
-
-        <div class="flex items-center space-x-4">
+        {/* Search (always visible) */}
+        <div className="hidden md:flex items-center space-x-4">
           <input
             type="text"
             placeholder="Search..."
-            class="px-3 py-1 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="px-3 py-1 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
           />
         </div>
-      </nav>
-    </div>
+
+        {/* Mobile Hamburger */}
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden mt-4 space-y-4 text-lg font-medium flex flex-col">
+          <Link to="/" className="hover:text-red-500 transition" onClick={() => setIsOpen(false)}>
+            Home
+          </Link>
+          <Link to="/movie" className="hover:text-red-500 transition" onClick={() => setIsOpen(false)}>
+            Movie
+          </Link>
+          <Link to="/tv" className="hover:text-red-500 transition" onClick={() => setIsOpen(false)}>
+            TV
+          </Link>
+          <Link to="/trending" className="hover:text-red-500 transition" onClick={() => setIsOpen(false)}>
+            Trending
+          </Link>
+
+          <input
+            type="text"
+            placeholder="Search..."
+            className="px-3 py-1 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
+        </div>
+      )}
+    </nav>
   );
 }
 
