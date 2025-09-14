@@ -9,7 +9,7 @@ function Home() {
       >
         <div className='inset-0 absolute bg-black opacity-40'></div>
         <div className="relative z-10 text-center max-w-2xl px-6">
-          <h1 className="text-5xl font-bold mb-4 text-white">​មូវី​ យើងខ្ញុំសូមស្វាគមន៍</h1>
+          <h1 className="text-5xl font-bold mb-4 text-white">​Wellcom to etec movie</h1>
           <p className="text-lg text-gray-300 mb-6">
             Watch the latest movies and TV shows online, anytime, anywhere.
           </p>
