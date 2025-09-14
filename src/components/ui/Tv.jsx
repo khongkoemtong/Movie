@@ -10,7 +10,6 @@ function Tv() {
       try {
         const take = await fetch('https://api.themoviedb.org/3/tv/popular?api_key=aacdbe83dedab8fc913bd72adf3fdbad');
         const result = await take.json();
-        // The API returns an object with a 'results' array
         setData(result.results || []);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -21,7 +20,6 @@ function Tv() {
     apitake();
   }, [])
 
-  // Auto-rotate banner every 5 seconds
   useEffect(() => {
     if (data.length > 0) {
       const interval = setInterval(() => {
@@ -167,7 +165,7 @@ function Tv() {
       {/* TV Shows Grid */}
       <main className="px-8 py-10">
         <h3 className="text-2xl font-semibold mb-6">Popular TV Shows</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-6">
           {data.map((show) => (
             <Link 
               key={show.id}

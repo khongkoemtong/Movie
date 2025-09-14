@@ -6,28 +6,20 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-black text-white px-6 py-4 shadow-lg">
+    <nav className="bg-black text-white px-6 py-4 shadow-lg sticky top-0 z-50">
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <div className="text-2xl font-bold tracking-wide">MovieApp</div>
+        <div className="text-2xl font-bold tracking-wide">ToNg-MoVIe</div>
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8 text-lg font-medium">
-          <Link to="/" className="hover:text-red-500 transition">
-            Home
-          </Link>
-          <Link to="/movie" className="hover:text-red-500 transition">
-            Movie
-          </Link>
-          <Link to="/tv" className="hover:text-red-500 transition">
-            TV
-          </Link>
-          <Link to="/trending" className="hover:text-red-500 transition">
-            Trending
-          </Link>
+          <Link to="/" className="hover:text-red-500 transition">Home</Link>
+          <Link to="/tv" className="hover:text-red-500 transition">TV</Link>
+          <Link to="/movie" className="hover:text-red-500 transition">Movie</Link>
+          <Link to="/trending" className="hover:text-red-500 transition">Trending</Link>
         </div>
 
-        {/* Search (always visible) */}
+        {/* Desktop Search */}
         <div className="hidden md:flex items-center space-x-4">
           <input
             type="text"
@@ -47,19 +39,12 @@ function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden mt-4 space-y-4 text-lg font-medium flex flex-col">
-          <Link to="/" className="hover:text-red-500 transition" onClick={() => setIsOpen(false)}>
-            Home
-          </Link>
-          <Link to="/movie" className="hover:text-red-500 transition" onClick={() => setIsOpen(false)}>
-            Movie
-          </Link>
-          <Link to="/tv" className="hover:text-red-500 transition" onClick={() => setIsOpen(false)}>
-            TV
-          </Link>
-          <Link to="/trending" className="hover:text-red-500 transition" onClick={() => setIsOpen(false)}>
-            Trending
-          </Link>
+          <Link to="/" onClick={() => setIsOpen(false)} className="hover:text-red-500 transition">Home</Link>
+          <Link to="/movie" onClick={() => setIsOpen(false)} className="hover:text-red-500 transition">Movie</Link>
+          <Link to="/tv" onClick={() => setIsOpen(false)} className="hover:text-red-500 transition">TV</Link>
+          <Link to="/trending" onClick={() => setIsOpen(false)} className="hover:text-red-500 transition">Trending</Link>
 
+          {/* Mobile Search */}
           <input
             type="text"
             placeholder="Search..."

@@ -5,6 +5,7 @@ function MovieDetail() {
     const { id } = useParams(); // Extract id from URL parameters
     const [data, setData] = useState(null);
     
+    
     useEffect(() => {
         const takeapi = async () => {
             try {
@@ -31,12 +32,12 @@ function MovieDetail() {
     return (
         <div className="p-8 flex justify-center items-center">
             {/* Removed map() since data is a single object, not an array */}
-            <div className="w-[70%] h-[75vh] flex  bg-gray-900 text-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 transform transition duration-300 cursor-pointer">
+            <div className="w-[90%] h-[80vh] flex  bg-gray-900 text-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 transform transition duration-300 cursor-pointer">
                 <img
-                    className="w-full h-full object-cover"
+                    className="w-[50%] h-full object-cover"
                     src={
-                        data.poster_path
-                            ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+                        data.backdrop_path
+                            ? `https://image.tmdb.org/t/p/w500${data.backdrop_path}`
                             : "https://via.placeholder.com/500x750?text=No+Image"
                     }
                     alt={data.title}
@@ -48,7 +49,8 @@ function MovieDetail() {
                         Release Date: {data.release_date || "Unknown"}
                     </p>
                     <p className="text-sm text-yellow-400 mb-2">
-                        Rating: {data.vote_average || "N/A"}
+                        Rating:  {data.vote_average || "N/A"}
+                        ⭐
                     </p>
                     <p className="text-gray-400 text-sm line-clamp-4">
                         {data.overview || "No description available."}
