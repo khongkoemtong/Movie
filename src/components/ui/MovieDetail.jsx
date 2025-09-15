@@ -30,11 +30,11 @@ function MovieDetail() {
     }
 
     return (
-        <div className="p-8 flex justify-center items-center">
+        <div className="p-[10px] pb-[200px] flex lg:m-[20px] lg:h-[100vh]    lg:flex justify-center items-center">
             {/* Removed map() since data is a single object, not an array */}
-            <div className="w-[90%] h-[80vh] flex  bg-gray-900 text-white rounded-2xl overflow-hidden shadow-lg hover:scale-105 transform transition duration-300 cursor-pointer">
+            <div className="w-[100%] h-[100%]   bg-gray-900 text-white rounded-2xl overflow-hidden shadow-lg hover:scale-[102%] transform transition duration-300 cursor-pointer lg:flex ">
                 <img
-                    className="w-[50%] h-full object-cover"
+                    className=" h-[50%] w-[100%] lg:h-[100%] lg:w-[100%] object-cover"
                     src={
                         data.backdrop_path
                             ? `https://image.tmdb.org/t/p/w500${data.backdrop_path}`
@@ -43,7 +43,7 @@ function MovieDetail() {
                     alt={data.title}
                 />
 
-                <div className="ps-[50px] pt-[100px] ">
+                <div className="ps-[50px] pt-[50px] flex pb-[100px] justify-center  flex-col   w-[100%] lg:w-[50%] lg:-mt-[100px]   ">
                     <h2 className="text-xl font-bold mb-2">{data.title}</h2>
                     <p className="text-sm text-gray-300 mb-2">
                         Release Date: {data.release_date || "Unknown"}
